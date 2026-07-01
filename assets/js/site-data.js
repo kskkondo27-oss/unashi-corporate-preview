@@ -19,5 +19,10 @@ window.UNASHI_SITE_DATA = {
     cases: "/cases/",
     aiSatei: "/ai-satei/",
     buzzassist: "https://buzzassist.ai/"
+  },
+  form: {
+    provider: "Formspree",
+    endpoint: "",
+    fallbackEmail: "info@unashi.com"
   }
 };
