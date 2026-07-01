@@ -16,8 +16,8 @@ window.UNASHI_SITE_DATA = {
   links: {
     line: "https://lin.ee/VWzb6U6",
     media: "https://media.unashi.com/",
-    cases: "/cases/",
-    aiSatei: "/ai-satei/",
+    cases: "./market/",
+    aiSatei: "./ai-satei/",
     buzzassist: "https://buzzassist.ai/"
   },
   form: {
