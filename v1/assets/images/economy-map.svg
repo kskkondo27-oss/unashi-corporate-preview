@@ -1,0 +1,32 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Creator economy concept map</title>
+  <desc id="desc">A concept diagram connecting BuzzAssist, operations support, BGM, creator matching, and YouTube M&amp;A.</desc>
+  <rect width="960" height="540" rx="8" fill="#25262E"/>
+  <rect x="60" y="70" width="840" height="400" rx="8" fill="#FFFFFF" fill-opacity="0.06" stroke="#FFFFFF" stroke-opacity="0.16"/>
+  <circle cx="480" cy="270" r="82" fill="#1F0CE1"/>
+  <circle cx="480" cy="270" r="54" fill="#FFE15A"/>
+  <path d="M458 238L522 270L458 302V238Z" fill="#25262E"/>
+  <g fill="#FFFFFF">
+    <rect x="106" y="118" width="220" height="86" rx="8" fill-opacity="0.1" stroke="#FFFFFF" stroke-opacity="0.18"/>
+    <rect x="634" y="118" width="220" height="86" rx="8" fill-opacity="0.1" stroke="#FFFFFF" stroke-opacity="0.18"/>
+    <rect x="106" y="336" width="220" height="86" rx="8" fill-opacity="0.1" stroke="#FFFFFF" stroke-opacity="0.18"/>
+    <rect x="634" y="336" width="220" height="86" rx="8" fill-opacity="0.1" stroke="#FFFFFF" stroke-opacity="0.18"/>
+  </g>
+  <g stroke="#FFE15A" stroke-width="4" stroke-linecap="round">
+    <path d="M326 161C386 171 423 204 450 230"/>
+    <path d="M634 161C574 171 537 204 510 230"/>
+    <path d="M326 379C386 369 423 336 450 310"/>
+    <path d="M634 379C574 369 537 336 510 310"/>
+  </g>
+  <g font-family="IBM Plex Sans JP, Noto Sans JP, sans-serif" font-weight="700">
+    <text x="133" y="153" fill="#FFE15A" font-size="18">入口</text>
+    <text x="133" y="182" fill="#FFFFFF" font-size="22">BuzzAssist</text>
+    <text x="662" y="153" fill="#FFE15A" font-size="18">運営</text>
+    <text x="662" y="182" fill="#FFFFFF" font-size="22">制度・お金</text>
+    <text x="133" y="371" fill="#FFE15A" font-size="18">事業化</text>
+    <text x="133" y="400" fill="#FFFFFF" font-size="22">BGM提供</text>
+    <text x="662" y="371" fill="#FFE15A" font-size="18">出口</text>
+    <text x="662" y="400" fill="#FFFFFF" font-size="22">YouTube M&amp;A</text>
+    <text x="398" y="474" fill="#FFFFFF" font-size="24">Creator Economy</text>
+  </g>
+</svg>

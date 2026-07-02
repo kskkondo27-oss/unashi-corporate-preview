@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>案件詳細｜ウナシ YouTubeチャンネル売買</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container inner">
+      <a href="../" class="brand">
+        <span class="mark"></span>
+        <span>UNASHI<small>YouTube M&amp;A案件プラットフォーム</small></span>
+      </a>
+      <nav class="header-nav">
+        <a href="../business/ma/">YouTube M&amp;A</a>
+        <a href="index.html#deals">案件をさがす</a>
+        <a href="index.html#flow">ご利用の流れ</a>
+        <a href="../contact/">お問い合わせ</a>
+        <a href="index.html#deals" class="btn btn-primary">案件一覧へ</a>
+      </nav>
+    </div>
+  </header>
+
+  <div id="detail-root" class="container">
+    <div class="breadcrumb">
+      <a href="index.html">トップ</a> ＞ <a href="index.html#deals">案件一覧</a> ＞ <span id="bc-title"></span>
+    </div>
+
+    <div class="detail-head">
+      <div class="badge-row" id="deal-badges"></div>
+      <h1 id="deal-title"></h1>
+      <div class="deal-id" id="deal-id-label"></div>
+    </div>
+
+    <div class="detail-grid">
+      <div>
+        <div class="panel">
+          <h2>案件の概要</h2>
+          <p class="summary" id="deal-summary"></p>
+        </div>
+
+        <div class="panel">
+          <h2>基本情報</h2>
+          <table class="spec-table"><tbody id="spec-body"></tbody></table>
+        </div>
+
+        <div class="panel comment-panel" id="panel-comment">
+          <h2>担当者の見立て</h2>
+          <p class="comment-body"></p>
+          <p class="panel-note">※ 売り込みではなく、担当者が査定時に感じたことを率直に書いています。</p>
+        </div>
+
+        <div class="panel" id="panel-strengths">
+          <h2>この案件の強み</h2>
+          <div class="panel-content"></div>
+        </div>
+
+        <div class="panel" id="panel-risks">
+          <h2>リスクと留意点</h2>
+          <div class="panel-content"></div>
+        </div>
+
+        <div class="panel" id="panel-scope">
+          <h2>譲渡の範囲</h2>
+          <div class="panel-content"></div>
+        </div>
+
+        <div class="panel">
+          <h2>6つの評価</h2>
+          <div class="radar-wrap">
+            <div style="width:300px;max-width:100%" id="radar-holder"></div>
+            <div class="radar-legend" id="radar-legend"></div>
+          </div>
+          <p style="font-size:0.78rem;color:#64748b;margin-top:12px">※ 評価は、ウナシが査定時のデータをもとに5段階でつけたものです。詳しい根拠資料はお問い合わせ後にご案内します。</p>
+        </div>
+
+        <div class="panel" id="panel-trend">
+          <h2>直近6ヶ月の推移</h2>
+          <div class="chart-tabs">
+            <button id="tab-views" type="button">月間再生数</button>
+            <button id="tab-profit" type="button">月の利益</button>
+          </div>
+          <div id="trend-holder"></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="panel inquiry-panel">
+          <div class="price-line">
+            <div class="label">希望価格</div>
+            <div class="price" id="inq-price"></div>
+          </div>
+          <div id="line-area">
+            <a id="line-inquiry" class="btn btn-line btn-block" target="_blank" rel="noopener">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 5.64 2 10.13c0 4.02 3.56 7.39 8.37 8.03.33.07.77.22.89.5.1.26.07.66.03.92l-.14.87c-.04.26-.2 1.01.88.55 1.09-.46 5.87-3.46 8.01-5.92C21.52 13.45 22 11.86 22 10.13 22 5.64 17.52 2 12 2z"/></svg>
+              LINEで問い合わせる
+            </a>
+            <p class="form-note" style="text-align:center">友だち追加すると、この案件の番号入りメッセージが自動でセットされます。約30秒で完了します。</p>
+          </div>
+          <div id="mail-toggle-area" class="mail-toggle">
+            <button type="button" id="mail-toggle">LINEを使わない方（メールで問い合わせる）</button>
+          </div>
+          <form id="inquiry-form" novalidate style="display:none">
+            <div class="form-field">
+              <label>お名前<span class="req">必須</span></label>
+              <input type="text" name="name" placeholder="例）山田 太郎" required>
+            </div>
+            <div class="form-field">
+              <label>メールアドレス<span class="req">必須</span></label>
+              <input type="email" name="email" placeholder="例）example@mail.com" required>
+            </div>
+            <div class="form-field">
+              <label>お問い合わせの種類</label>
+              <select name="type">
+                <option>購入を検討したい</option>
+                <option>もう少し詳しく知りたい</option>
+                <option>似た条件の案件を紹介してほしい</option>
+                <option>自分のチャンネルを売りたい</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label>ご質問・ご希望（任意）</label>
+              <textarea name="message" placeholder="気になる点があればご記入ください"></textarea>
+            </div>
+            <div class="form-error" id="form-error"></div>
+            <button type="submit" class="btn btn-accent btn-block">この案件について問い合わせる</button>
+            <p class="form-note">・お問い合わせは無料です。<br>・売主さまと直接やり取りすることはありません。やり取りはすべてウナシが間に入って行います。<br>・いただいた情報は本件のご案内以外には使いません。</p>
+          </form>
+          <div class="form-success" id="form-success">
+            お問い合わせありがとうございます。<br>
+            担当者より、2営業日以内にメールでご連絡します。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="foot-grid">
+        <div>
+          <a href="../" class="brand">
+            <span class="mark"></span>
+            <span>UNASHI<small>YouTube M&amp;A案件プラットフォーム</small></span>
+          </a>
+          <p style="margin-top:12px">YouTubeに関わるすべての人の、つぎの一歩を支えます。</p>
+        </div>
+        <div class="market-footer-links">
+          <b>関連リンク</b>
+          <a href="index.html">案件一覧</a>
+          <a href="../business/ma/">YouTube M&amp;A</a>
+          <a href="../business/">事業紹介</a>
+          <a href="../contact/">お問い合わせ</a>
+        </div>
+      </div>
+      <div class="copy">© 株式会社ウナシ</div>
+    </div>
+  </footer>
+
+  <script src="data/deals.js"></script>
+  <script>
+    window.UNASHI_CONFIG = {
+      LINE_OA_ID: "",
+      SHEET_CSV_URL: "",
+      INQUIRY_ENDPOINT: "",
+      INQUIRY_MAILTO: "info@unashi.com"
+    };
+  </script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
