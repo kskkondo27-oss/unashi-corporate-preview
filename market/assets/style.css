@@ -84,6 +84,21 @@ a:hover { opacity: 0.85; }
   background: linear-gradient(135deg, var(--blue-600) 58%, var(--yellow-500) 58%);
   display: inline-block;
 }
+.brand-mark {
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  color: #fff;
+  background: var(--blue-900);
+  border-radius: 8px;
+  font-size: 0.86rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0;
+}
 .brand small {
   display: block;
   font-size: 0.65rem;
@@ -647,6 +662,7 @@ a:hover { opacity: 0.85; }
   margin-bottom: 24px;
 }
 .site-footer .brand { color: #fff; }
+.site-footer .brand-mark { background: var(--blue-600); }
 .site-footer .brand small { color: #aeb8d2; }
 .site-footer a { color: #c6d2f5; }
 .site-footer .roadmap { font-size: 0.78rem; line-height: 2; }

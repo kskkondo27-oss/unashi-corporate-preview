@@ -325,13 +325,16 @@ function initListPage(allDeals) {
   const grid = document.getElementById("deal-grid");
   if (!grid) return;
 
-  // カテゴリの選択肢は、実際に掲載中の案件から組み立てる
+  // カテゴリの選択肢は、実際に掲載中の案件から組み立てる。
+  // 案件マスター（NN）の「ジャンル」列が増えれば、ここも自動で増える。
   const catSel = document.getElementById("filter-category");
-  [...new Set(allDeals.map((d) => d.category))].forEach((c) => {
-    const o = document.createElement("option");
-    o.value = c; o.textContent = c;
-    catSel.appendChild(o);
-  });
+  [...new Set(allDeals.map((d) => d.category).filter(Boolean))]
+    .sort((a, b) => a.localeCompare(b, "ja"))
+    .forEach((c) => {
+      const o = document.createElement("option");
+      o.value = c; o.textContent = c;
+      catSel.appendChild(o);
+    });
 
   const render = () => {
     const cat = catSel.value;
@@ -399,7 +402,7 @@ function initListPage(allDeals) {
   if (senko) {
     const senkoButton = document.getElementById("line-senko");
     if (CONFIG.LINE_OA_ID) {
-      const text = encodeURIComponent(`未公開案件の先行案内を希望します。\n希望ジャンル：\n価格帯：\n体制の希望（ディレクター付き等）：\n（流入元：${sourceLabel()}）`);
+      const text = encodeURIComponent(`未公開案件の先行案内を希望します。\n希望ジャンル：\n価格帯：\n運営責任者(ディレクター)譲渡希望：\n（流入元：${sourceLabel()}）`);
       senkoButton.href = `https://line.me/R/oaMessage/${encodeURIComponent(CONFIG.LINE_OA_ID)}/?${text}`;
     } else if (CONFIG.CONDITION_LINE_URL) {
       senkoButton.href = CONFIG.CONDITION_LINE_URL;
