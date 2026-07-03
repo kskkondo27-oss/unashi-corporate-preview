@@ -97,12 +97,12 @@ function getParam(name) {
 // ---- 流入元トラッキング -------------------------------
 // どの入口から来た問い合わせかを記録する。
 //   ?from=media     → メディア（media.unashi.com）内からの導線
-//   ?from=buyer-lp  → 買主様LPからの導線
+//   ?from=buyer-lp  → 買主さまLPからの導線
 //   ?utm_source=xxx → 広告等。from が無ければこちらを使う
 // 一度ついた流入元は sessionStorage に保存し、一覧→詳細の遷移をまたいでも保持する。
 const SOURCE_LABELS = {
   "media": "メディア",
-  "buyer-lp": "買主様LP",
+  "buyer-lp": "買主さまLP",
   "media-banner": "メディア内バナー",
 };
 function getSource() {
