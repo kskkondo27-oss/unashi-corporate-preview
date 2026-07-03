@@ -18,7 +18,7 @@ const CONFIG = Object.assign(
     LINE_OA_ID: "",                       // 例: "@unashi"
     INQUIRY_ENDPOINT: "",                 // 例: "/api/inquiry"
     INQUIRY_MAILTO: "info@unashi.co.jp",  // 仮アドレス。正式な受付アドレスに差し替える
-    SHEET_CSV_URL: "",                    // 例: "https://docs.google.com/spreadsheets/d/e/xxxx/pub?gid=0&single=true&output=csv"
+    SHEET_CSV_URL: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGwpJjKG1FbazM9LiQrdzZj22QecTcb7btFT30giR8s2y2EfSQK7xgUSVHNeOtN0bM6pi5tacTRAet/pub?output=csv",
     CONDITION_LINE_URL: "https://lin.ee/fscNIJr7",
   },
   (typeof window !== "undefined" && window.UNASHI_CONFIG) || {}
@@ -56,6 +56,11 @@ function priceParts(man) {
 }
 
 const TBD_HTML = `<span class="tbd">${TBD}</span>`;
+const HIDDEN_STATUSES = new Set(["下書き", "非公開"]);
+
+function visibleDeals(deals) {
+  return deals.filter((deal) => !HIDDEN_STATUSES.has(String(deal.status || "").trim()));
+}
 
 function subsLabel(n) {
   if (!hasVal(n)) return TBD_HTML;
@@ -220,6 +225,7 @@ function dealsFromCSV(text) {
       const i = header.indexOf(name);
       return i === -1 ? "" : (r[i] || "").trim();
     };
+    if (HIDDEN_STATUSES.has(get("状態"))) continue;
     const d = rowToDeal(get);
     if (d.id && d.title) deals.push(d);
   }
@@ -228,15 +234,14 @@ function dealsFromCSV(text) {
 
 // スプレッドシート優先、失敗時は deals.js のデータで表示
 async function loadDeals() {
-  if (!CONFIG.SHEET_CSV_URL) return DEALS;
+  if (!CONFIG.SHEET_CSV_URL) return visibleDeals(DEALS);
   try {
     const res = await fetch(CONFIG.SHEET_CSV_URL, { cache: "no-store" });
     if (!res.ok) throw new Error("HTTP " + res.status);
-    const deals = dealsFromCSV(await res.text());
-    return deals.length ? deals : DEALS;
+    return visibleDeals(dealsFromCSV(await res.text()));
   } catch (e) {
     console.warn("スプレッドシートを読めなかったため deals.js の内容で表示します:", e.message);
-    return DEALS;
+    return visibleDeals(DEALS);
   }
 }
 
@@ -408,6 +413,16 @@ function initListPage(allDeals) {
 function initDetailPage(allDeals) {
   const root = document.getElementById("detail-root");
   if (!root) return;
+  if (!allDeals.length) {
+    root.innerHTML = `
+      <section class="panel">
+        <h2>公開中の案件がありません</h2>
+        <p>現在表示できる案件がありません。条件に合う案件は、ウナシまでお問い合わせください。</p>
+        <a class="btn btn-primary" href="index.html">案件一覧へ戻る</a>
+      </section>
+    `;
+    return;
+  }
 
   const deal = allDeals.find((d) => d.id === getParam("id")) || allDeals[0];
   document.title = `${deal.title}｜ウナシ YouTubeチャンネル売買`;
