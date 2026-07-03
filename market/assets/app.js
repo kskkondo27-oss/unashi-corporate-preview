@@ -17,7 +17,7 @@ const CONFIG = Object.assign(
   {
     LINE_OA_ID: "",                       // 例: "@unashi"
     INQUIRY_ENDPOINT: "",                 // 例: "/api/inquiry"
-    INQUIRY_MAILTO: "info@unashi.co.jp",  // 仮アドレス。正式な受付アドレスに差し替える
+    INQUIRY_MAILTO: "info@unashi.com",
     SHEET_CSV_URL: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGwpJjKG1FbazM9LiQrdzZj22QecTcb7btFT30giR8s2y2EfSQK7xgUSVHNeOtN0bM6pi5tacTRAet/pub?output=csv",
     CONDITION_LINE_URL: "https://lin.ee/fscNIJr7",
   },

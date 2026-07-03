@@ -32,6 +32,6 @@ This package is a static HTML/CSS/JS draft for replacing the current unashi.com 
 - Existing `.htaccess` rules.
 - Formspree endpoint and target email delivery test.
 - Deal platform config: `LINE_OA_ID`, `SHEET_CSV_URL`, `INQUIRY_ENDPOINT`, and `CONDITION_LINE_URL` in `cases/index.html` and `cases/deal.html`.
-- Official X URLs for `xRepresentative` and `xOfficial` in `assets/js/site-data.js`.
+- Representative X URL is configured in `assets/js/site-data.js` as `xRepresentative`. Official X is intentionally not listed.
 - Official company profile values: representative, address, capital.
 - Whether `index.html` or `index.php` should be the production entrypoint.

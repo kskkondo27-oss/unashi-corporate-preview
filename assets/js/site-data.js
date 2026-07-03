@@ -20,8 +20,8 @@ window.UNASHI_SITE_DATA = {
     cases: "/cases/",
     aiSatei: "/ai-satei/",
     buzzassist: "https://buzzassist.ai/",
-    xRepresentative: "#",
-    xOfficial: "#"
+    bgmDiagnosis: "https://ksk-kondo-27-c02c973c-8076-vm.westcentralus.cloudapp.azure.com:8447/",
+    xRepresentative: "https://x.com/ksk_kondo"
   },
   form: {
     provider: "Formspree",
