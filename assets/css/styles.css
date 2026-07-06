@@ -2921,6 +2921,16 @@ textarea {
   border: 0;
 }
 
+.video-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.video-cta .button {
+  min-width: min(100%, 320px);
+}
+
 .page-hero-buzz {
   background:
     radial-gradient(circle at 78% 22%, rgba(41, 31, 224, 0.14), transparent 34%),
