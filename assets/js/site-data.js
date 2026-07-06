@@ -10,7 +10,7 @@ window.UNASHI_SITE_DATA = {
     maAverageDeal: "平均単価1,000万円超",
     bgmMilestone: "累計再生100億回突破",
     bgmMonthly: "提供規模拡大中",
-    bgmChannels: "500ch+ に提供",
+    bgmChannels: "1,000ch+ に提供",
     bgmSongs: "1,000曲+",
     bgmRevenueShare: "クリエイター70% / ウナシ30%"
   },
