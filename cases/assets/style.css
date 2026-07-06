@@ -689,3 +689,33 @@ a:hover { opacity: 0.85; }
   .filter-bar .count { margin-left: 0; width: 100%; }
   .card-chart { width: 100px; }
 }
+
+/* 買主向け紹介動画バンド */
+.video-band {
+  padding: 56px 0 8px;
+}
+
+.video-band-head {
+  max-width: 760px;
+  margin: 0 auto 22px;
+  text-align: center;
+}
+
+.video-band-head h2 {
+  margin: 0 0 10px;
+  font-size: clamp(22px, 3vw, 30px);
+}
+
+.video-band-head p {
+  margin: 0;
+  color: #555;
+}
+
+.intro-video {
+  display: block;
+  width: min(100%, 920px);
+  margin: 0 auto;
+  border-radius: 16px;
+  box-shadow: 0 18px 48px rgba(15, 23, 42, 0.14);
+  background: #000;
+}
