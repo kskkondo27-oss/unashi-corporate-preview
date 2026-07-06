@@ -641,6 +641,82 @@ textarea {
   color: rgba(255, 255, 255, 0.76);
 }
 
+.business-economy-visual {
+  position: relative;
+  min-height: 360px;
+  margin: 0;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--radius-md);
+  background: #101827;
+  box-shadow: 0 28px 72px rgba(0, 0, 0, 0.26);
+}
+
+.business-economy-visual::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(90deg, rgba(18, 21, 30, 0.3), rgba(18, 21, 30, 0.76)),
+    url("../images/business-economy-network-3d.png") center / cover no-repeat;
+  transform: scale(1.02);
+}
+
+.business-economy-visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 70% 42%, rgba(41, 31, 224, 0.14), transparent 34%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0));
+}
+
+.business-economy-visual__content {
+  display: grid;
+  gap: 12px;
+  width: min(74%, 430px);
+  margin-left: auto;
+  padding: clamp(18px, 3vw, 26px);
+}
+
+.business-economy-visual__panel {
+  padding: 16px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius-md);
+  background: rgba(20, 25, 36, 0.64);
+  backdrop-filter: blur(12px);
+}
+
+.business-economy-visual__panel span {
+  display: block;
+  color: var(--color-yellow);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.business-economy-visual__panel strong {
+  display: block;
+  margin-top: 5px;
+  color: var(--color-white);
+  font-size: clamp(17px, 2vw, 21px);
+  line-height: 1.35;
+}
+
+.business-economy-visual figcaption {
+  position: absolute;
+  left: 22px;
+  bottom: 18px;
+  color: rgba(255, 255, 255, 0.78);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
 .economy-map {
   display: grid;
   gap: 14px;
@@ -2735,6 +2811,14 @@ textarea {
     grid-template-columns: 1fr;
   }
 
+  .business-economy-visual {
+    min-height: 420px;
+  }
+
+  .business-economy-visual__content {
+    width: min(66%, 430px);
+  }
+
   .fv-inner {
     min-height: auto;
     padding: 58px 0 76px;
@@ -2884,6 +2968,28 @@ textarea {
   .floating-line {
     right: 12px;
     bottom: 12px;
+  }
+
+  .business-economy-visual {
+    min-height: 520px;
+  }
+
+  .business-economy-visual::before {
+    background-position: 46% center;
+  }
+
+  .business-economy-visual__content {
+    width: 100%;
+    padding: 16px;
+  }
+
+  .business-economy-visual__panel {
+    padding: 14px;
+  }
+
+  .business-economy-visual figcaption {
+    left: 16px;
+    bottom: 14px;
   }
 }
 
