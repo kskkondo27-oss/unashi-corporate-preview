@@ -17,8 +17,9 @@ const CONFIG = Object.assign(
   {
     LINE_OA_ID: "",                       // 例: "@unashi"
     INQUIRY_ENDPOINT: "",                 // 例: "/api/inquiry"
-    INQUIRY_MAILTO: "info@unashi.co.jp",  // 仮アドレス。正式な受付アドレスに差し替える
-    SHEET_CSV_URL: "",                    // 例: "https://docs.google.com/spreadsheets/d/e/xxxx/pub?gid=0&single=true&output=csv"
+    INQUIRY_MAILTO: "info@unashi.com",
+    SHEET_CSV_URL: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGwpJjKG1FbazM9LiQrdzZj22QecTcb7btFT30giR8s2y2EfSQK7xgUSVHNeOtN0bM6pi5tacTRAet/pub?output=csv",
+    CONDITION_LINE_URL: "https://lin.ee/fscNIJr7",
   },
   (typeof window !== "undefined" && window.UNASHI_CONFIG) || {}
 );
@@ -55,6 +56,11 @@ function priceParts(man) {
 }
 
 const TBD_HTML = `<span class="tbd">${TBD}</span>`;
+const HIDDEN_STATUSES = new Set(["下書き", "非公開"]);
+
+function visibleDeals(deals) {
+  return deals.filter((deal) => !HIDDEN_STATUSES.has(String(deal.status || "").trim()));
+}
 
 function subsLabel(n) {
   if (!hasVal(n)) return TBD_HTML;
@@ -91,12 +97,12 @@ function getParam(name) {
 // ---- 流入元トラッキング -------------------------------
 // どの入口から来た問い合わせかを記録する。
 //   ?from=media     → メディア（media.unashi.com）内からの導線
-//   ?from=buyer-lp  → 買主様LPからの導線
+//   ?from=buyer-lp  → 買主さまLPからの導線
 //   ?utm_source=xxx → 広告等。from が無ければこちらを使う
 // 一度ついた流入元は sessionStorage に保存し、一覧→詳細の遷移をまたいでも保持する。
 const SOURCE_LABELS = {
   "media": "メディア",
-  "buyer-lp": "買主様LP",
+  "buyer-lp": "買主さまLP",
   "media-banner": "メディア内バナー",
 };
 function getSource() {
@@ -219,6 +225,7 @@ function dealsFromCSV(text) {
       const i = header.indexOf(name);
       return i === -1 ? "" : (r[i] || "").trim();
     };
+    if (HIDDEN_STATUSES.has(get("状態"))) continue;
     const d = rowToDeal(get);
     if (d.id && d.title) deals.push(d);
   }
@@ -227,15 +234,14 @@ function dealsFromCSV(text) {
 
 // スプレッドシート優先、失敗時は deals.js のデータで表示
 async function loadDeals() {
-  if (!CONFIG.SHEET_CSV_URL) return DEALS;
+  if (!CONFIG.SHEET_CSV_URL) return visibleDeals(DEALS);
   try {
     const res = await fetch(CONFIG.SHEET_CSV_URL, { cache: "no-store" });
     if (!res.ok) throw new Error("HTTP " + res.status);
-    const deals = dealsFromCSV(await res.text());
-    return deals.length ? deals : DEALS;
+    return visibleDeals(dealsFromCSV(await res.text()));
   } catch (e) {
     console.warn("スプレッドシートを読めなかったため deals.js の内容で表示します:", e.message);
-    return DEALS;
+    return visibleDeals(DEALS);
   }
 }
 
@@ -319,13 +325,16 @@ function initListPage(allDeals) {
   const grid = document.getElementById("deal-grid");
   if (!grid) return;
 
-  // カテゴリの選択肢は、実際に掲載中の案件から組み立てる
+  // カテゴリの選択肢は、実際に掲載中の案件から組み立てる。
+  // 案件マスター（NN）の「ジャンル」列が増えれば、ここも自動で増える。
   const catSel = document.getElementById("filter-category");
-  [...new Set(allDeals.map((d) => d.category))].forEach((c) => {
-    const o = document.createElement("option");
-    o.value = c; o.textContent = c;
-    catSel.appendChild(o);
-  });
+  [...new Set(allDeals.map((d) => d.category).filter(Boolean))]
+    .sort((a, b) => a.localeCompare(b, "ja"))
+    .forEach((c) => {
+      const o = document.createElement("option");
+      o.value = c; o.textContent = c;
+      catSel.appendChild(o);
+    });
 
   const render = () => {
     const cat = catSel.value;
@@ -388,13 +397,15 @@ function initListPage(allDeals) {
   });
   render();
 
-  // 未公開案件のLINE先行案内（OA未設定のあいだはセクションごと隠す）
+  // 未公開案件の条件登録。OA IDがあればメッセージ付き、未設定なら公式LINEの短縮URLへ。
   const senko = document.getElementById("line-senko-section");
   if (senko) {
+    const senkoButton = document.getElementById("line-senko");
     if (CONFIG.LINE_OA_ID) {
-      const text = encodeURIComponent(`未公開案件の先行案内を希望します。\n希望ジャンル：\n価格帯：\n体制の希望（ディレクター付き等）：\n（流入元：${sourceLabel()}）`);
-      document.getElementById("line-senko").href =
-        `https://line.me/R/oaMessage/${encodeURIComponent(CONFIG.LINE_OA_ID)}/?${text}`;
+      const text = encodeURIComponent(`未公開案件の先行案内を希望します。\n希望ジャンル：\n価格帯：\n運営責任者(ディレクター)譲渡希望：\n（流入元：${sourceLabel()}）`);
+      senkoButton.href = `https://line.me/R/oaMessage/${encodeURIComponent(CONFIG.LINE_OA_ID)}/?${text}`;
+    } else if (CONFIG.CONDITION_LINE_URL) {
+      senkoButton.href = CONFIG.CONDITION_LINE_URL;
     } else {
       senko.style.display = "none";
     }
@@ -405,6 +416,16 @@ function initListPage(allDeals) {
 function initDetailPage(allDeals) {
   const root = document.getElementById("detail-root");
   if (!root) return;
+  if (!allDeals.length) {
+    root.innerHTML = `
+      <section class="panel">
+        <h2>公開中の案件がありません</h2>
+        <p>現在表示できる案件がありません。条件に合う案件は、ウナシまでお問い合わせください。</p>
+        <a class="btn btn-primary" href="index.html">案件一覧へ戻る</a>
+      </section>
+    `;
+    return;
+  }
 
   const deal = allDeals.find((d) => d.id === getParam("id")) || allDeals[0];
   document.title = `${deal.title}｜ウナシ YouTubeチャンネル売買`;

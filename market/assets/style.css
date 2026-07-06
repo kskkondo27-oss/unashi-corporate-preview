@@ -84,6 +84,21 @@ a:hover { opacity: 0.85; }
   background: linear-gradient(135deg, var(--blue-600) 58%, var(--yellow-500) 58%);
   display: inline-block;
 }
+.brand-mark {
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  color: #fff;
+  background: var(--blue-900);
+  border-radius: 8px;
+  font-size: 0.86rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0;
+}
 .brand small {
   display: block;
   font-size: 0.65rem;
@@ -246,6 +261,47 @@ a:hover { opacity: 0.85; }
 .senko-banner h2::before { content: none; }
 .senko-banner p { font-size: 0.9rem; color: #dbe4ff; max-width: 560px; }
 .senko-banner .btn-line { flex-shrink: 0; padding: 15px 30px; }
+
+.buyer-condition-form {
+  margin-top: 18px;
+  padding: 22px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.condition-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+.condition-grid label {
+  display: grid;
+  gap: 6px;
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+.condition-grid input,
+.condition-grid select,
+.condition-grid textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+}
+.condition-grid textarea {
+  min-height: 96px;
+  resize: vertical;
+}
+.condition-grid .wide {
+  grid-column: 1 / -1;
+}
 
 /* ---------- 担当者の見立て ---------- */
 .comment-panel { border-left: 6px solid var(--yellow-500); }
@@ -606,6 +662,7 @@ a:hover { opacity: 0.85; }
   margin-bottom: 24px;
 }
 .site-footer .brand { color: #fff; }
+.site-footer .brand-mark { background: var(--blue-600); }
 .site-footer .brand small { color: #aeb8d2; }
 .site-footer a { color: #c6d2f5; }
 .site-footer .roadmap { font-size: 0.78rem; line-height: 2; }
@@ -628,6 +685,7 @@ a:hover { opacity: 0.85; }
 @media (max-width: 640px) {
   .hero-stats { grid-template-columns: 1fr; }
   .header-nav { display: none; }
+  .condition-grid { grid-template-columns: 1fr; }
   .filter-bar .count { margin-left: 0; width: 100%; }
   .card-chart { width: 100px; }
 }

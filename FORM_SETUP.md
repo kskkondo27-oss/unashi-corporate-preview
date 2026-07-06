@@ -5,7 +5,7 @@
 現在のLP builder / SlideflowのフォームAPIは、LP builder契約終了後に動作保証ができないため再利用しません。
 新サイトは静的HTML/CSS/JSのまま公開し、お問い合わせフォームの送信処理だけFormspreeに切り出す構成を推奨します。
 
-## 業者様への設定依頼
+## 業者さまへの設定依頼
 
 1. Formspreeで `info@unashi.com` 宛のフォームを作成してください。
 2. Formspree管理画面で発行されるエンドポイントを控えてください。

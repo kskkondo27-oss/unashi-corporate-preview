@@ -3,8 +3,9 @@ DirectoryIndex index.html index.php
 
 RewriteEngine On
 
-# Route legacy case-list URLs to the new market platform.
-Redirect 301 /cases/ /market/
+# Future production URL design uses /cases/ as the M&A deal list.
+# Keep the previous preview path working if someone has already bookmarked it.
+Redirect 301 /market/ /cases/
 
 # Preserve existing root-managed services if they exist on the server.
 RewriteRule ^ai-satei/ - [L]
