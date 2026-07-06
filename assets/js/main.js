@@ -35,7 +35,7 @@
     }
 
     if (!endpoint && status) {
-      status.textContent = "送信ボタンを押すと、info@unashi.com 宛のメール作成画面が開きます。";
+      status.textContent = "プレビュー中のためフォーム送信は停止中です。公開時に送信先を設定します。";
       status.setAttribute("data-state", "preview");
     }
 
@@ -44,21 +44,10 @@
       form.classList.add("is-submitted");
 
       if (!endpoint) {
-        var formData = new FormData(form);
-        var subject = formData.get("_subject") || "unashi.com お問い合わせ";
-        var body = Array.from(formData.entries())
-          .filter(function (entry) {
-            return entry[0].charAt(0) !== "_";
-          })
-          .map(function (entry) {
-            return entry[0] + ": " + entry[1];
-          })
-          .join("\n");
         if (status) {
-          status.textContent = fallbackEmail + " 宛のメール作成画面を開きました。";
-          status.setAttribute("data-state", "success");
+          status.textContent = "現在はプレビュー用です。お急ぎの場合は " + fallbackEmail + " へご連絡ください。";
+          status.setAttribute("data-state", "error");
         }
-        window.location.href = "mailto:" + fallbackEmail + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
         return;
       }
 
@@ -98,25 +87,6 @@
             submit.textContent = "送信する";
           }
         });
-    });
-  });
-
-  function trackEvent(name, props) {
-    if (!name) return;
-    if (typeof window.gtag === "function") {
-      window.gtag("event", name, props || {});
-    }
-    if (typeof window.plausible === "function") {
-      window.plausible(name, { props: props || {} });
-    }
-  }
-
-  document.addEventListener("click", function (event) {
-    var target = event.target.closest("[data-track-event]");
-    if (!target) return;
-    trackEvent(target.getAttribute("data-track-event"), {
-      section: target.getAttribute("data-track-section") || "",
-      label: target.textContent.trim()
     });
   });
 })();

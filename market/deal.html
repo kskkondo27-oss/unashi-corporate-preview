@@ -15,8 +15,8 @@
   <header class="site-header">
     <div class="container inner">
       <a href="../" class="brand">
-        <span class="brand-mark">U</span>
-        <span>UNASHI</span>
+        <span class="mark"></span>
+        <span>UNASHI<small>YouTube M&amp;A案件プラットフォーム</small></span>
       </a>
       <nav class="header-nav">
         <a href="../business/ma/">YouTube M&amp;A</a>
@@ -147,8 +147,8 @@
       <div class="foot-grid">
         <div>
           <a href="../" class="brand">
-            <span class="brand-mark">U</span>
-            <span>UNASHI</span>
+            <span class="mark"></span>
+            <span>UNASHI<small>YouTube M&amp;A案件プラットフォーム</small></span>
           </a>
           <p style="margin-top:12px">YouTubeに関わるすべての人の、つぎの一歩を支えます。</p>
         </div>
@@ -165,10 +165,14 @@
   </footer>
 
   <script src="data/deals.js"></script>
-  <script>window.UNASHI_CONFIG = { SHEET_CSV_URL: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGwpJjKG1FbazM9LiQrdzZj22QecTcb7btFT30giR8s2y2EfSQK7xgUSVHNeOtN0bM6pi5tacTRAet/pub?output=csv" };</script>
+  <script>
+    window.UNASHI_CONFIG = {
+      LINE_OA_ID: "",
+      SHEET_CSV_URL: "",
+      INQUIRY_ENDPOINT: "",
+      INQUIRY_MAILTO: "info@unashi.com"
+    };
+  </script>
   <script src="assets/app.js"></script>
-  <div class="line-share-widget" aria-label="LINEで共有">
-    <div class="line-it-button" data-lang="ja" data-type="share-b" data-env="PROD" data-url="https://unashi.com/" data-color="default" data-size="large" data-count="false" data-ver="3" style="display: none;"></div>
-  </div>
-  <script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script></body>
+</body>
 </html>
