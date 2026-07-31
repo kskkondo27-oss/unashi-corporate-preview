@@ -777,7 +777,7 @@ textarea {
 .stat-card strong {
   display: block;
   color: var(--color-navy);
-  font-size: clamp(24px, 3vw, 34px);
+  font-size: clamp(22px, 2.5vw, 30px);
   line-height: 1.2;
 }
 
@@ -1871,7 +1871,7 @@ textarea {
 .home-blue-gate .a2-copy h1 {
   margin: 0;
   color: #003f7d;
-  font-size: clamp(48px, 6.3vw, 86px);
+  font-size: clamp(36px, 4.35vw, 56px);
   font-weight: 800;
   line-height: 1.15;
   letter-spacing: 0;
@@ -3216,3 +3216,9 @@ textarea {
     justify-content: center;
   }
 }
+
+/* --- 折り返し調整ユーティリティ（2026-07 表示QA対応） --- */
+.u-nowrap { white-space: nowrap; }
+.a2-copy h1 .highlight { white-space: nowrap; }
+.u-vision-title { font-size: clamp(26px, 3.4vw, 43px) !important; line-height: 1.4 !important; }
+.u-vision-title-sm { font-size: clamp(22px, 2.8vw, 36px) !important; line-height: 1.4 !important; }
